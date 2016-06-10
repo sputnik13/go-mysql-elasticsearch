@@ -187,6 +187,24 @@ func (r *River) makeReqColumnData(col *schema.TableColumn, value interface{}) in
 		case []byte:
 			return string(value[:])
 		}
+
+	case schema.TYPE_DATETIME:
+		switch value := value.(type) {
+		case string:
+			return strings.Replace(value, "-", "/", 2)
+		}
+
+	case schema.TYPE_TIMESTAMP:
+		switch value := value.(type) {
+		case string:
+			return strings.Replace(value, "-", "/", 2)
+		}
+
+	case schema.TYPE_DATE:
+		switch value := value.(type) {
+		case string:
+			return strings.Replace(value, "-", "/", 2)
+		}
 	}
 
 	return value
